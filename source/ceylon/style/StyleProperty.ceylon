@@ -1,0 +1,5 @@
+
+shared
+interface StyleProperty {
+
+}
