@@ -5,19 +5,21 @@ Color defaultShadowColor = black.fadeTo(50);
 
 shared Stylesheet widgets = Stylesheet {
 	"button" -> Style {
-		background = Background(black);
+		background = black;
+		border = Border { width = 1; style = dashed; };
 		padding = Box(5, 5, 5, 5);
     }
 };
 
 Integer defaultMargin = 10; // px
 
-shared Stylesheet style = Stylesheet {
+shared Stylesheet sampleStyles = Stylesheet {
 
 	StyleImport(widgets, false),
 
 	"body" -> Style {
 		background = black.fadeOut(80);
+		border = Border { width = 2; };
 		padding = Box(5, 5, 5, 5);
 		fontWeight = bold;
 		value margin {

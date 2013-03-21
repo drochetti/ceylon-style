@@ -23,7 +23,10 @@ shared alias HorizontalPosition => Left|Center|Right;
 shared alias VerticalPosition => Top|Center|Bottom;
 
 doc ""
-shared class Position(horizontal = left, vertical = center) {
+shared abstract class Position(horizontal = left, vertical = center)
+    of leftTop | leftCenter | leftBottom
+        | centerTop | centerCenter | centerBottom
+        | rightTop | rightCenter | rightBottom {
 
 	shared HorizontalPosition horizontal;
 
