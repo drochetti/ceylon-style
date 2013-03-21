@@ -1,39 +1,31 @@
-import ceylon.style { Stylesheet, StyleElement, StyleImport, Style, Border }
+import ceylon.style { Stylesheet, StyleImport, Style, Border }
 import ceylon.style.serializer { SerializerConfiguration }
 
 doc ""
 shared abstract
 class StylesheetSerializer(stylesheet, config = defaultConfiguration) {
-    
+
     shared Stylesheet stylesheet;
     shared SerializerConfiguration config;
-    
+
     variable Integer indentLevel = 0;
-    
+
     shared formal void print(String string);
-    
+
     shared void serialize() {
         visit(stylesheet);
     }
-    
+
     void visit(Stylesheet stylesheet) {
         for (styleElement in stylesheet.styles) {
-            visitElement(styleElement);
+            switch(styleElement)
+            case (is String->Style) { visitStyle(styleElement); }
+            case (is StyleImport) { visitImport(styleElement); }
         }
     }
-    
-    void visitElement(StyleElement styleElement) {
-        switch(styleElement)
-        case (is String->Style) {
-            visitStyle(styleElement);
-        }
-        case (is StyleImport) {
-            visitImport(styleElement);
-        }
-    }
-    
+
     void visitStyle(String->Style styleSpec) {
-        if (config.prettyPrint) { print(process.newline); }
+        linefeed();
         indent();
         print(styleSpec.key);
         openCurly();
@@ -44,20 +36,19 @@ class StylesheetSerializer(stylesheet, config = defaultConfiguration) {
             indent();
             print(border.string);
         }
+        closeCurly();
         for (nestedStyle in style.nested) {
             visitStyle(nestedStyle);
         }
-        closeCurly();
     }
-    
+
     void visitImport(StyleImport styleImport) {
-        if (styleImport.nativeImport) {
-            print("@import url('``styleImport.stylesheet``');");
-        } else {
-            visit(styleImport.stylesheet);
-        }
+        value ref = styleImport.stylesheetReference;
+        switch (ref)
+        case(is String) { print("@import url('``ref``');"); }
+        case(is Stylesheet) { visit(ref); }
     }
-    
+
     void indent() {
         if (config.prettyPrint) {
             value spaces = indentLevel * 4;
@@ -66,28 +57,30 @@ class StylesheetSerializer(stylesheet, config = defaultConfiguration) {
             }
         }
     }
-    
+
     void openCurly() {
         if (config.prettyPrint) {
             print(" ");
         }
         print("{");
+        linefeed();
         if (config.prettyPrint) {
-            print(process.newline);
             indentLevel++;
         }
     }
-        
+
     void closeCurly() {
-        if (config.prettyPrint) {
-            print(process.newline);
-        }
+        linefeed();
         indentLevel--;
         indent();
         print("}");
+        linefeed();
+    }
+
+    void linefeed() {
         if (config.prettyPrint) {
             print(process.newline);
         }
     }
-    
+
 }

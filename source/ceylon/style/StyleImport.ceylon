@@ -1,5 +1,6 @@
 shared
-class StyleImport(stylesheet, nativeImport = false) {
-	shared Stylesheet stylesheet;
-	shared Boolean nativeImport;
+class StyleImport(stylesheetReference) {
+
+    shared Stylesheet|String stylesheetReference;
+
 }

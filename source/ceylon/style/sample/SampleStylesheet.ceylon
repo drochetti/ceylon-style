@@ -3,7 +3,7 @@ import ceylon.style.type { ... }
 
 Color defaultShadowColor = black.fadeTo(50);
 
-shared Stylesheet widgets = Stylesheet {
+Stylesheet widgets = Stylesheet {
 	"button" -> Style {
 		background = black;
 		border = Border { width = 1; style = dashed; };
@@ -15,7 +15,7 @@ Integer defaultMargin = 10; // px
 
 shared Stylesheet sampleStyles = Stylesheet {
 
-	StyleImport(widgets, false),
+	StyleImport(widgets),
 
 	"body" -> Style {
 		background = black.fadeOut(80);
@@ -41,35 +41,3 @@ shared Stylesheet sampleStyles = Stylesheet {
 	}
 
 };
-
-/*
-shared object widgets extends Stylesheet() {
-
-	shared actual void define() {
-		style("#wrapper", Style {
-			padding = Box(5, 5, 5, 5);
-		});
-	}
-
-}
-
-shared object style extends Stylesheet() {
-
-	shared actual void define() {
-
-		addImport(widgets);
-
-		style("#login", Style {
-			border = Border(1);
-			fontStyle = inherit;
-			background = Background {
-				color = black.fadeOut(20);
-				position = leftTopPosition;
-				repeat = repeatX;
-			};
-		});
-
-	}
-
-}
-*/
