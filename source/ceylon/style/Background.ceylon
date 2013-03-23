@@ -1,13 +1,12 @@
 import ceylon.style.type { Inherit }
 
+doc ""
+shared class Background(color, position = leftCenter, repeat = repeatBoth) {
 
-shared class Background(color, position = leftCenter,
-	repeat = repeatBoth) {
+    shared Color|Inherit color;
 
-	shared Color|Inherit color;
+    shared Position position;
 
-	shared Position position;
-
-	shared BackgroundRepeat|Inherit repeat;
+    shared BackgroundRepeat|Inherit repeat;
 
 }

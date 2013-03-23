@@ -1,9 +1,9 @@
-import ceylon.style.type { Inherit, None }
+import ceylon.style.type { ... }
 
 shared
 class Style(background = null, border = null, boxShadow = {},
         color = null, fontStyle = null, fontWeight = null,
-        margin = null, padding = null, nested = {}) {
+        margin = null, padding = null, textAlign = null, nested = {}) {
 
     shared Background|Color|Gradient|None? background;
     shared Border|None? border;
@@ -25,6 +25,8 @@ class Style(background = null, border = null, boxShadow = {},
     shared Box? margin;
 
     shared Box? padding;
+
+    shared TextAlign|Left|Center|Right|Inherit? textAlign;
 
     shared {<String->Style>*} nested;
 

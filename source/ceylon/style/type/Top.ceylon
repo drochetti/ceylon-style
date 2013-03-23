@@ -1,4 +1,4 @@
 
 shared object top extends Top() {}
 
-shared abstract class Top() {}
+shared abstract class Top() of top {}

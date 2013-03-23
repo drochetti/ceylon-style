@@ -1,7 +1,4 @@
 
-shared object center extends TextAlign("center") {}
+shared object justify extends TextAlign() {}
 
-shared
-class TextAlign(String align) {
-	
-}
+shared abstract class TextAlign() of justify {}
