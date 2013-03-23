@@ -1,6 +1,8 @@
 ceylon-style
 ============
 
+CSS stylesheet framework written in Ceylon
+
 Motivation
 ----------
 
