@@ -2,8 +2,10 @@
 shared
 interface StyleProperty {
 
-    shared actual default String string {
+    shared default String css {
         return className(this);
     }
+
+    shared actual default String string => css;
 
 }

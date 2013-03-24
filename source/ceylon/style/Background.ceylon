@@ -22,7 +22,7 @@ shared class Background(color = null, url = null,
         }
     }
 
-    shared actual String string {
+    shared actual String css {
         return "``color else ""`` ``formatUrl`` ``repeat`` ``position``";
     }
 

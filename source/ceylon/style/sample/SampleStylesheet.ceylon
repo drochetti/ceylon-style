@@ -32,7 +32,7 @@ shared Stylesheet sampleStyles = Stylesheet {
         nested = {
             "#header" -> Style {
                 background = Background {
-                    color = black;
+                    color = transparent;
                     url = "/img/header.png";
                     position = leftCenter;
                     repeat = repeatX;
