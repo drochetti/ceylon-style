@@ -36,7 +36,7 @@ shared Color thistle = fromHex("#d8bfd8");
 shared Color tomato = fromHex("#ff6347");
 
 shared object transparent extends Color([0, 0, 0], 0.0) {
-    shared actual String css = "transparent";
+    shared actual String css => "transparent";
 }
 
 shared Color turquoise = fromHex("#40e0d0");

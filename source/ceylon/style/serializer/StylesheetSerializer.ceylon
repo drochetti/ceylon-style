@@ -1,4 +1,4 @@
-import ceylon.style { Stylesheet, StyleImport, Style, StyleProperty }
+import ceylon.style { Stylesheet, StyleImport, Style }
 import ceylon.style.serializer { SerializerConfiguration }
 
 doc ""
