@@ -26,10 +26,13 @@ doc ""
 shared abstract class Position(horizontal = left, vertical = center)
     of leftTop | leftCenter | leftBottom
         | centerTop | centerCenter | centerBottom
-        | rightTop | rightCenter | rightBottom {
+        | rightTop | rightCenter | rightBottom
+    satisfies StyleProperty {
 
 	shared HorizontalPosition horizontal;
 
 	shared VerticalPosition vertical;
+
+    shared actual String string => "``horizontal`` ``vertical``";
 
 }

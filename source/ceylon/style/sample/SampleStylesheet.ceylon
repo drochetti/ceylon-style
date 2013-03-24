@@ -31,9 +31,17 @@ shared Stylesheet sampleStyles = Stylesheet {
         }
         nested = {
             "#header" -> Style {
+                background = Background {
+                    color = black;
+                    url = "/img/header.png";
+                    position = leftCenter;
+                    repeat = repeatX;
+                };
+                fontStyle = italic;
                 nested = {
                     "&.selected" -> Style {
-                        
+                        fontWeight = bolder;
+                        fontStyle = inherit;
                     }
                 };
             }

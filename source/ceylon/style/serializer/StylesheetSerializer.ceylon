@@ -1,4 +1,4 @@
-import ceylon.style { Stylesheet, StyleImport, Style, Border }
+import ceylon.style { Stylesheet, StyleImport, Style }
 import ceylon.style.serializer { SerializerConfiguration }
 
 doc ""
@@ -24,18 +24,36 @@ class StylesheetSerializer(stylesheet, config = defaultConfiguration) {
         }
     }
 
+    void printProperty(String name, Object? property, Boolean prefixed = false) {
+        if (exists property) {
+            linefeed();
+            indent();
+            print("``name``: ``property.string.normalized``;");
+        }
+    }
+    
     void visitStyle(String->Style styleSpec) {
         linefeed();
         indent();
         print(styleSpec.key);
         openCurly();
+
         // TODO refactor when metamodel/reflection is done
         value style = styleSpec.item;
-        value border = style.border;
-        if (is Border border) {
-            indent();
-            print(border.string);
-        }
+        printProperty("background", style.background);
+        printProperty("border", style.border);
+        //printProperty(style.boxShadow);
+        printProperty("color", style.color);
+        printProperty("font-style", style.fontStyle);
+        printProperty("font-weight", style.fontWeight);
+        printProperty("line-height", style.lineHeight);
+        printProperty("margin", style.margin);
+        printProperty("opacity", style.opacity);
+        printProperty("padding", style.padding);
+        printProperty("text-align", style.textAlign);
+        printProperty("text-decoration", style.textDecoration);
+        printProperty("text-transform", style.textTransform);
+
         closeCurly();
         for (nestedStyle in style.nested) {
             visitStyle(nestedStyle);
@@ -63,10 +81,7 @@ class StylesheetSerializer(stylesheet, config = defaultConfiguration) {
             print(" ");
         }
         print("{");
-        linefeed();
-        if (config.prettyPrint) {
-            indentLevel++;
-        }
+        indentLevel++;
     }
 
     void closeCurly() {

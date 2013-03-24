@@ -1,5 +1,7 @@
 
-shared object repeatBoth extends BackgroundRepeat("both") {}
+shared object repeatBoth extends BackgroundRepeat("both") {
+    //shared actual string = "both";
+}
 
 shared object repeatX extends BackgroundRepeat("x") {}
 
@@ -9,4 +11,5 @@ shared object noRepeat extends BackgroundRepeat(null) {}
 
 shared abstract
 class BackgroundRepeat(String? repeat)
-    of repeatBoth | repeatX | repeatY | noRepeat {}
+    of repeatBoth | repeatX | repeatY | noRepeat
+    satisfies StyleProperty {}

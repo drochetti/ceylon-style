@@ -10,12 +10,12 @@ shared abstract class Gradient(color) {
 
 shared class LinearGradient({Color|ColorStop*} color) extends Gradient(color) {
 
-    shared actual String type => "linear";
+    shared actual String type = "linear";
 
 }
 
 shared class RadialGradient({Color|ColorStop*} color) extends Gradient(color) {
 
-    shared actual String type => "radial";
+    shared actual String type = "radial";
 
 }

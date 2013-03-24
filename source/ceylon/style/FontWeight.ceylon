@@ -1,16 +1,17 @@
 
-shared object lighter extends FontWeight(300) { }
 
-shared object normal extends FontWeight(400) { }
+shared object lighter extends FontWeight(300) {}
 
-shared object semibold extends FontWeight(600) { }
+shared object normal extends FontWeight(400) {}
 
-shared object bold extends FontWeight(700) { }
+shared object semibold extends FontWeight(600) {}
 
-shared object bolder extends FontWeight(800) { }
+shared object bold extends FontWeight(700) {}
 
-shared class FontWeight(weight) {
+shared object bolder extends FontWeight(800) {}
 
-	shared Integer weight;
+shared class FontWeight(weight) satisfies StyleProperty {
+
+    shared Integer weight;
 
 }

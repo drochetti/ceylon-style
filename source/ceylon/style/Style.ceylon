@@ -2,15 +2,16 @@ import ceylon.style.type { ... }
 
 shared
 class Style(background = null, border = null, boxShadow = {},
-        color = null, fontStyle = null, fontWeight = null,
-        margin = null, padding = null, textAlign = null, nested = {}) {
+        color = null, fontStyle = null, fontWeight = null, lineHeight = null,
+        margin = null, opacity = null, padding = null, textAlign = null,
+        textDecoration = null, textTransform = null, nested = {}) {
 
     shared Background|Color|Gradient|None? background;
     shared Border|None? border;
-	//shared Border? borderTop;
-	//shared Border? borderRight;
-	//shared Border? borderBottom;
-	//shared Border? borderLeft;
+    //shared Border? borderTop;
+    //shared Border? borderRight;
+    //shared Border? borderBottom;
+    //shared Border? borderLeft;
 
     shared {BoxShadow*} boxShadow;
 
@@ -24,9 +25,17 @@ class Style(background = null, border = null, boxShadow = {},
 
     shared Box? margin;
 
+    shared Float|Integer? opacity;
+
     shared Box? padding;
 
+    shared Integer|Float|Size|Normal|Inherit? lineHeight;
+
     shared TextAlign|Left|Center|Right|Inherit? textAlign;
+
+    shared TextDecoration|None|Inherit? textDecoration;
+
+    shared TextTransform|None|Inherit? textTransform;
 
     shared {<String->Style>*} nested;
 

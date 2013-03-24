@@ -23,6 +23,6 @@ shared class Border(width = 1, style = solid, color = black)
 
     shared Color color;
 
-    shared actual String string => "border: ``width`` ``style.name`` ``color``;";
+    shared actual String string => "``width`` ``style.name`` ``color``";
 
 }
