@@ -18,7 +18,7 @@ shared Stylesheet sampleStyles = Stylesheet {
     StyleImport(widgets),
 
     "body" -> Style {
-        background = black.fadeOut(80);
+        background = whitesmoke.fadeOut(20);
         border = Border { width = 2; };
         padding = Box(5, 5, 5, 5);
         fontWeight = bold;
