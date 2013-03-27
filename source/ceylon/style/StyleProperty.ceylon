@@ -4,7 +4,7 @@ shared interface StyleProperty {
     shared default String css {
         variable value cssValue = className(this);
         if (exists last = cssValue.lastOccurrence(":")) {
-            cssValue = cssValue.segment(last + 1, cssValue.size);
+            cssValue = cssValue[last + 1...];
         }
         return cssValue;
     }

@@ -13,3 +13,5 @@ shared abstract
 class BackgroundRepeat(String? repeat)
     of repeatBoth | repeatX | repeatY | noRepeat
     satisfies StyleProperty {}
+
+alias MeuTipo => String|Integer|Null;

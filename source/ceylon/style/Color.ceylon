@@ -59,9 +59,7 @@ shared class Color(rgb, alpha = 1.0)
         return alpha < 1.0 then rgba else hex;
     }
 
-    Float limitValue(Float val) {
-        return min({1.0, max({0.0, val})});
-    }
+    Float limitValue(Float val) => min({1.0, max({0.0, val})});
 
     shared String hex {
         value hexColor = "".join(rgb.map((Integer elem) {
@@ -79,9 +77,9 @@ shared class Color(rgb, alpha = 1.0)
 
     shared HSL hsl {
         value maxColorByte = 255.0;
-        value r = red.float / maxColorByte;
-        value g = red.float / maxColorByte;
-        value b = red.float / maxColorByte;
+        value r = red / maxColorByte;
+        value g = green / maxColorByte;
+        value b = blue / maxColorByte;
 
         value minColor = min({r, g, b});
         value maxColor = max({r, g, b});
@@ -109,33 +107,33 @@ shared class Color(rgb, alpha = 1.0)
 
     shared Color lighten(Integer amount) {
         assert(amount in percentageRange);
-        value hslAttr = hsl;
-        return hslAttr.copy {
-            l = limitValue(hslAttr.lightness - (amount / 100.0));
+        value hslValues = hsl;
+        return hslValues.copy {
+            l = limitValue(hslValues.lightness - (amount / 100.0));
         }.color;
     }
 
     shared Color darken(Integer amount) {
         assert(amount in percentageRange);
-        value hslAttr = hsl;
-        return hslAttr.copy {
-            l = limitValue(hslAttr.lightness + (amount / 100.0));
+        value hslValues = hsl;
+        return hslValues.copy {
+            l = limitValue(hslValues.lightness + (amount / 100.0));
         }.color;
     }
 
     shared Color saturate(Integer amount) {
         assert(amount in percentageRange);
-        value hslAttr = hsl;
-        return hslAttr.copy {
-            s = limitValue(hslAttr.saturation + (amount / 100.0));
+        value hslValues = hsl;
+        return hslValues.copy {
+            s = limitValue(hslValues.saturation + (amount / 100.0));
         }.color;
     }
 
     shared Color desaturate(Integer amount) {
         assert(amount in percentageRange);
-        value hslAttr = hsl;
-        return hslAttr.copy {
-            s = limitValue(hslAttr.saturation - (amount / 100.0));
+        value hslValues = hsl;
+        return hslValues.copy {
+            s = limitValue(hslValues.saturation - (amount / 100.0));
         }.color;
     }
 
@@ -161,13 +159,8 @@ shared class Color(rgb, alpha = 1.0)
     shared actual Color plus(Color other) => nothing; /* TODO auto-generated stub */
 
     shared actual Comparison compare(Color other) {
-        value result = [
-            red <=> other.red,
-            green <=> other.green,
-            blue <=> other.blue,
-            alpha <=> other.alpha
-        ];
-        return result.find((Comparison elem) => elem != equal) else equal;
+        value result = sum(rgb) <=> sum(other.rgb);
+        return result != equal then result else alpha <=> other.alpha;
     }
 
 }
@@ -187,7 +180,7 @@ shared Color fromHex(String hexColorSpec) {
 }
 
 shared Color rgba(Integer red, Integer green, Integer blue, Float alpha) {
-	return Color([red, green, blue], alpha);
+    return Color([red, green, blue], alpha);
 }
 
 shared Color rgb(Integer red, Integer green, Integer blue) {

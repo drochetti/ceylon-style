@@ -38,3 +38,8 @@ shared class Size(size, unit = pixels) satisfies Number {
 }
 
 shared Size px(Number size) => Size(size, pixels);
+
+//shared interface NumberSizeExtensions adapts Number {
+//    Size px => Size(this, px);
+//}
+
