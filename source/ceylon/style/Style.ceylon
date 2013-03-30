@@ -1,7 +1,7 @@
 import ceylon.style.type { ... }
 
 shared
-class Style(background = null, border = null, boxShadow = {},
+class Style(background = null, border = null, boxShadow = null,
         color = null, fontStyle = null, fontWeight = null, lineHeight = null,
         margin = null, opacity = null, padding = null, textAlign = null,
         textDecoration = null, textTransform = null, nested = {}) {
@@ -13,7 +13,7 @@ class Style(background = null, border = null, boxShadow = {},
     //shared Border? borderBottom;
     //shared Border? borderLeft;
 
-    shared {BoxShadow*} boxShadow;
+    shared BoxShadow? boxShadow;
 
     shared Color|Inherit? color;
 

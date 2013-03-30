@@ -1,17 +1,13 @@
 
-shared object repeatBoth extends BackgroundRepeat("both") {
-    //shared actual string = "both";
-}
+shared object repeatBoth extends BackgroundRepeat() {}
 
-shared object repeatX extends BackgroundRepeat("x") {}
+shared object repeatX extends BackgroundRepeat() {}
 
-shared object repeatY extends BackgroundRepeat("y") {}
+shared object repeatY extends BackgroundRepeat() {}
 
-shared object noRepeat extends BackgroundRepeat(null) {}
+shared object noRepeat extends BackgroundRepeat() {}
 
 shared abstract
-class BackgroundRepeat(String? repeat)
+class BackgroundRepeat()
     of repeatBoth | repeatX | repeatY | noRepeat
     satisfies StyleProperty {}
-
-alias MeuTipo => String|Integer|Null;
