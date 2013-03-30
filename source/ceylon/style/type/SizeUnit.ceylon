@@ -39,6 +39,8 @@ shared class Size(size, unit = pixels) satisfies Number {
 
 shared Size px(Number size) => Size(size, pixels);
 
+shared alias StyleSize => Size|Integer|Float;
+
 //shared interface NumberSizeExtensions adapts Number {
 //    Size px => Size(this, px);
 //}

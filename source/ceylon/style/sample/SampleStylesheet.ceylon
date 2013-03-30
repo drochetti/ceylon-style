@@ -7,7 +7,7 @@ Stylesheet widgets = Stylesheet {
     "button" -> Style {
         background = black;
         Border { width = 1; style = dashed; };
-        padding = Box(5, 5, 5, 5);
+        padding = [5, 10];
     }
 };
 
@@ -20,14 +20,11 @@ shared Stylesheet sampleStyles = Stylesheet {
     "body" -> Style {
         background = whitesmoke.fadeOut(20);
         Border(2);
-        padding = Box(5, 5, 5, 5);
+        padding = [2, px(5), 1, 2];
         fontWeight = bold;
         value margin {
             value margin = defaultMargin * 1.5;
-            return Box {
-                top = defaultMargin; right = margin.integer;
-                bottom = defaultMargin; left = margin.integer;
-            };
+            return [ defaultMargin, margin.integer, defaultMargin, margin.integer ];
         }
         "#header" -> Style {
             Background {
