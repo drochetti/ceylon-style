@@ -26,7 +26,8 @@ shared Stylesheet sampleStyles = Stylesheet {
             value margin = defaultMargin * 1.5;
             return [ defaultMargin, margin.integer, defaultMargin, margin.integer ];
         }
-        "#header" -> Style {
+
+        ".header, .header-alternative" -> Style {
             Background {
                 color = transparent;
                 url = "/img/header.png";
@@ -34,10 +35,12 @@ shared Stylesheet sampleStyles = Stylesheet {
                 repeat = repeatX;
             };
             fontStyle = italic;
+
             "&.selected" -> Style {
                 fontWeight = bolder;
                 fontStyle = inherit;
             }
+
         }
     }
 

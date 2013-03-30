@@ -1,3 +1,4 @@
+import ceylon.collection { LinkedList }
 import ceylon.style { Stylesheet, StyleImport, Style }
 import ceylon.style.serializer { SerializerConfiguration }
 
@@ -9,6 +10,8 @@ class StylesheetSerializer(stylesheet, config = defaultConfiguration) {
     shared SerializerConfiguration config;
 
     variable Integer indentLevel = 0;
+
+    value selectors = LinkedList<String>();
 
     shared formal void print(String string);
 
@@ -23,19 +26,14 @@ class StylesheetSerializer(stylesheet, config = defaultConfiguration) {
             case (is StyleImport) { visitImport(styleElement); }
         }
     }
-
-    void printProperty(String name, Object? property, Boolean prefixed = false) {
-        if (exists property) {
-            linefeed();
-            indent();
-            print("``name``: ``property.string.normalized``;");
-        }
-    }
     
     void visitStyle(String->Style styleSpec) {
+        value selector = styleSpec.key;
+        selectors.add(selector);
+
         linefeed();
         indent();
-        print(styleSpec.key);
+        printSelector();
         openCurly();
 
         // TODO refactor when metamodel/reflection is done
@@ -58,6 +56,9 @@ class StylesheetSerializer(stylesheet, config = defaultConfiguration) {
         for (nestedStyle in style.nested) {
             visitStyle(nestedStyle);
         }
+        if (exists last = selectors.lastIndex) {
+            selectors.remove(last);
+        }
     }
 
     void visitImport(StyleImport styleImport) {
@@ -67,11 +68,32 @@ class StylesheetSerializer(stylesheet, config = defaultConfiguration) {
         case(is Stylesheet) { visit(ref); }
     }
 
+    void printSelector() {
+        // TODO I don't think it handle all the cases, benchmark LESS and SASS cases
+        value selector = selectors.fold("", (String partial, String elem) {
+            return ", ".join((partial).split(",").collect((String oneSelector) {
+                value s = elem.trimmed;
+                assert(exists first = s.first);
+                return oneSelector + (first == '&' then s[1...] else " " + s);
+            }));
+        });
+        print(selector.normalized);
+    }
+
+    void printProperty(String name, Object? property, Boolean prefixed = false) {
+        if (exists property) {
+            linefeed();
+            indent();
+            // TODO improve serialization of each property type (no generic .string or special cases)
+            print("``name``: ``property.string.normalized``;");
+        }
+    }
+
     void indent() {
         if (config.prettyPrint) {
             value spaces = indentLevel * 4;
-            for (i in 0..spaces) {
-                print(" ");
+            if (spaces > 0) {
+                print(" ".repeat(spaces));
             }
         }
     }

@@ -39,4 +39,9 @@ class Style(background = null, border = null, boxShadow = null,
 
     shared {<String->Style>*} nested;
 
+    shared Style apply(Style style) {
+        // TODO mix them
+        return style;
+    }
+
 }

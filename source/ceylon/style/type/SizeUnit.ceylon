@@ -35,6 +35,8 @@ shared class Size(size, unit = pixels) satisfies Number {
     
     shared actual Number wholePart => size.wholePart;
 
+    shared actual String string => size.string + unit.classifier;
+
 }
 
 shared Size px(Number size) => Size(size, pixels);
