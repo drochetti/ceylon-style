@@ -36,7 +36,7 @@ shared Stylesheet sampleStyles = Stylesheet {
             };
             fontStyle = italic;
 
-            "&.selected" -> Style {
+            "&.selected, &:hover" -> Style {
                 fontWeight = bolder;
                 fontStyle = inherit;
             }

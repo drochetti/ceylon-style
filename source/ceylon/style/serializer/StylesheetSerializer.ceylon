@@ -69,15 +69,24 @@ class StylesheetSerializer(stylesheet, config = defaultConfiguration) {
     }
 
     void printSelector() {
-        // TODO I don't think it handle all the cases, benchmark LESS and SASS cases
+        // I'm sure this can be better, but it seems to do the job so far...
         value selector = selectors.fold("", (String partial, String elem) {
-            return ", ".join((partial).split(",").collect((String oneSelector) {
-                value s = elem.trimmed;
-                assert(exists first = s.first);
-                return oneSelector + (first == '&' then s[1...] else " " + s);
+            return ",".join((partial).split(",").collect((String oneSelector) {
+                value allSelectors = LinkedList<String>();
+                for (e in elem.split(",")) {
+                    value s = e.trimmed;
+                    assert(exists first = s.first);
+                    allSelectors.add(oneSelector + (first == '&' then s[1...] else " " + s));
+                }
+                return ",".join(allSelectors);
             }));
         });
-        print(selector.normalized);
+        if (config.prettyPrint) {
+            // TODO break and indent multiple selectors?
+            print(selector.normalized);
+        } else {
+            print(selector.normalized);
+        }
     }
 
     void printProperty(String name, Object? property, Boolean prefixed = false) {
