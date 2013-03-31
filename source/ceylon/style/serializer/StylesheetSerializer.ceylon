@@ -70,20 +70,22 @@ class StylesheetSerializer(stylesheet, config = defaultConfiguration) {
 
     void printSelector() {
         // I'm sure this can be better, but it seems to do the job so far...
+        value comma = ",";
         value selector = selectors.fold("", (String partial, String elem) {
-            return ",".join((partial).split(",").collect((String oneSelector) {
+            return comma.join((partial).split(comma).collect((String oneSelector) {
                 value allSelectors = LinkedList<String>();
-                for (e in elem.split(",")) {
+                for (e in elem.split(comma)) {
                     value s = e.trimmed;
                     assert(exists first = s.first);
-                    allSelectors.add(oneSelector + (first == '&' then s[1...] else " " + s));
+                    allSelectors.add(oneSelector.trimmed
+                            + (first == '&' then s[1...] else " " + s));
                 }
-                return ",".join(allSelectors);
+                return comma.join(allSelectors);
             }));
         });
         if (config.prettyPrint) {
-            // TODO break and indent multiple selectors?
-            print(selector.normalized);
+            value separator = comma + process.newline + indentString + " ";
+            print(separator.join(selector.split(comma)));
         } else {
             print(selector.normalized);
         }
@@ -100,11 +102,13 @@ class StylesheetSerializer(stylesheet, config = defaultConfiguration) {
 
     void indent() {
         if (config.prettyPrint) {
-            value spaces = indentLevel * 4;
-            if (spaces > 0) {
-                print(" ".repeat(spaces));
-            }
+            print(indentString);
         }
+    }
+
+    String indentString {
+        value spaces = indentLevel * 4;
+        return spaces > 0 then " ".repeat(spaces) else "";
     }
 
     void openCurly() {
