@@ -1,4 +1,5 @@
 import ceylon.style { ... }
+import ceylon.style.selector { ... }
 import ceylon.style.type { ... }
 
 Color defaultShadowColor = black.fadeTo(50);
@@ -17,7 +18,7 @@ shared Stylesheet sampleStyles = Stylesheet {
 
     StyleImport(widgets),
 
-    "body" -> Style {
+    body.cn("mobile").hover -> Style {
         background = whitesmoke.fadeOut(20);
         Border(2);
         padding = [2, px(5), 1, 2];
@@ -26,6 +27,10 @@ shared Stylesheet sampleStyles = Stylesheet {
             value margin = defaultMargin * 1.5;
             return [ defaultMargin, margin.integer, defaultMargin, margin.integer ];
         }
+
+        {el.id("thumb").hover, span.cn("thumb")} -> Style {
+            background = azure;
+        },
 
         ".header, .header-alternative" -> Style {
             Background {

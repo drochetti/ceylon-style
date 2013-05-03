@@ -1,5 +1,5 @@
 import ceylon.collection { LinkedList }
-import ceylon.style { Stylesheet, StyleImport, Style }
+import ceylon.style { Stylesheet, StyleImport, Style, CssSelector }
 import ceylon.style.serializer { SerializerConfiguration }
 
 doc ""
@@ -11,7 +11,7 @@ class StylesheetSerializer(stylesheet, config = defaultConfiguration) {
 
     variable Integer indentLevel = 0;
 
-    value selectors = LinkedList<String>();
+    value selectors = LinkedList<CssSelector>();
 
     shared formal void print(String string);
 
@@ -22,12 +22,12 @@ class StylesheetSerializer(stylesheet, config = defaultConfiguration) {
     void visit(Stylesheet stylesheet) {
         for (styleElement in stylesheet.styles) {
             switch(styleElement)
-            case (is String->Style) { visitStyle(styleElement); }
+            case (is CssSelector->Style) { visitStyle(styleElement); }
             case (is StyleImport) { visitImport(styleElement); }
         }
     }
     
-    void visitStyle(String->Style styleSpec) {
+    void visitStyle(CssSelector->Style styleSpec) {
         value selector = styleSpec.key;
         selectors.add(selector);
 
@@ -71,13 +71,13 @@ class StylesheetSerializer(stylesheet, config = defaultConfiguration) {
     void printSelector() {
         // I'm sure this can be better, but it seems to do the job so far...
         value comma = ",";
-        value selector = selectors.fold("", (String partial, String elem) {
-            return comma.join((partial).split(comma).collect((String oneSelector) {
+        value selector = selectors.fold("", (String partial, CssSelector elem) {
+            return comma.join((partial).split(comma).collect((CssSelector oneSelector) {
                 value allSelectors = LinkedList<String>();
-                for (e in elem.split(comma)) {
+                for (e in elem.string.split(comma)) {
                     value s = e.trimmed;
                     assert(exists first = s.first);
-                    allSelectors.add(oneSelector.trimmed
+                    allSelectors.add(oneSelector.string.trimmed
                             + (first == '&' then s[1...] else " " + s));
                 }
                 return comma.join(allSelectors);

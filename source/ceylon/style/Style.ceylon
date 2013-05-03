@@ -37,7 +37,7 @@ class Style(background = null, border = null, boxShadow = null,
 
     shared TextTransform|None|Inherit? textTransform;
 
-    shared {<String->Style>*} nested;
+    shared {<CssSelector->Style>*} nested;
 
     shared Style apply(Style style) {
         // TODO mix them

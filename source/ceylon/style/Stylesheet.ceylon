@@ -1,11 +1,10 @@
+import ceylon.style.selector { Selector }
 
-//shared alias StyleElement => StyleSelector|StyleImport;
-shared alias StyleElement => <<String->Style>|StyleImport>;
+shared alias CssSelector => String|Selector|{Selector+};
 
 shared
 class Stylesheet(styles) {
 
-    shared {<<String->Style>|StyleImport>*} styles;
-    //shared {StyleElement*} styles;
+    shared {<<CssSelector->Style>|StyleImport>*} styles;
 
 }
