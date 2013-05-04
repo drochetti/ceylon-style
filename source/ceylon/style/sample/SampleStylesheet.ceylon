@@ -5,7 +5,7 @@ import ceylon.style.type { ... }
 Color defaultShadowColor = black.fadeTo(50);
 
 Stylesheet widgets = Stylesheet {
-    "button" -> Style {
+    button -> Style {
         background = black;
         Border { width = 1; style = dashed; };
         padding = [5, 10];

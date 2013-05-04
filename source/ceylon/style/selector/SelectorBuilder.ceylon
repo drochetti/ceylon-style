@@ -13,4 +13,10 @@ shared interface SelectorBuilder satisfies Selector {
     shared default CompositeSelector hover =>
             CompositeSelector(this, PseudoSelector("hover"));
 
+    shared default CompositeSelector active =>
+            CompositeSelector(this, PseudoSelector("active"));
+
+    shared default CompositeSelector focus =>
+            CompositeSelector(this, PseudoSelector("focus"));
+
 }
