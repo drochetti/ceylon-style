@@ -18,7 +18,7 @@ shared Stylesheet sampleStyles = Stylesheet {
 
     StyleImport(widgets),
 
-    body.cn("mobile").hover -> Style {
+    body -> Style {
         background = whitesmoke.fadeOut(20);
         Border(2);
         padding = [2, px(5), 1, 2];
@@ -28,11 +28,7 @@ shared Stylesheet sampleStyles = Stylesheet {
             return [ defaultMargin, margin.integer, defaultMargin, margin.integer ];
         }
 
-        {el.id("thumb").hover, span.cn("thumb")} -> Style {
-            background = azure;
-        },
-
-        ".header, .header-alternative" -> Style {
+        [el.cn("header"), el.cn("header-alternative")] -> Style { // ".header, .header-alternative"
             Background {
                 color = transparent;
                 url = "/img/header.png";
@@ -41,7 +37,7 @@ shared Stylesheet sampleStyles = Stylesheet {
             };
             fontStyle = italic;
 
-            "&.selected, &:hover" -> Style {
+            [and.cn("selected"), and.hover] -> Style { // "&.selected, &:hover" 
                 fontWeight = bolder;
                 fontStyle = inherit;
             }

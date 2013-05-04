@@ -1,6 +1,7 @@
 import ceylon.collection { LinkedList }
 import ceylon.style { Stylesheet, StyleImport, Style, CssSelector }
 import ceylon.style.serializer { SerializerConfiguration }
+import ceylon.style.selector { Selector }
 
 doc ""
 shared abstract
@@ -74,10 +75,10 @@ class StylesheetSerializer(stylesheet, config = defaultConfiguration) {
         value selector = selectors.fold("", (String partial, CssSelector elem) {
             return comma.join((partial).split(comma).collect((CssSelector oneSelector) {
                 value allSelectors = LinkedList<String>();
-                for (e in elem.string.split(comma)) {
+                for (e in toCss(elem).split(comma)) {
                     value s = e.trimmed;
                     assert(exists first = s.first);
-                    allSelectors.add(oneSelector.string.trimmed
+                    allSelectors.add(toCss(oneSelector).trimmed
                             + (first == '&' then s[1...] else " " + s));
                 }
                 return comma.join(allSelectors);
@@ -89,6 +90,14 @@ class StylesheetSerializer(stylesheet, config = defaultConfiguration) {
         } else {
             print(selector.normalized);
         }
+    }
+
+    String toCss(CssSelector selector) {
+        if (is Sequence<String|Selector> selector) {
+            return ", ".join(selector.collect(
+                    (String|Selector element) => element.string));
+        }
+        return selector.string;
     }
 
     void printProperty(String name, Object? property, Boolean prefixed = false) {

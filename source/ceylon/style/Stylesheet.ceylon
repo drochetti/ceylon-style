@@ -1,6 +1,6 @@
 import ceylon.style.selector { Selector }
 
-shared alias CssSelector => String|Selector|{Selector+};
+shared alias CssSelector => String|[String+]|Selector|[Selector+];
 
 shared
 class Stylesheet(styles) {
