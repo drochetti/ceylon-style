@@ -2,9 +2,10 @@ import ceylon.style.type { ... }
 
 shared
 class Style(background = null, border = null, boxShadow = null,
-        color = null, fontStyle = null, fontWeight = null, lineHeight = null,
-        margin = null, opacity = null, padding = null, textAlign = null,
-        textDecoration = null, textTransform = null, nested = {}) {
+        color = null, display = null, fontStyle = null, fontWeight = null,
+        lineHeight = null, margin = null, opacity = null, outline = null,
+        padding = null, textAlign = null, textDecoration = null,
+        textTransform = null, nested = {}) {
 
     shared Background|Color|Gradient|None? background;
     shared Border|None? border;
@@ -17,15 +18,19 @@ class Style(background = null, border = null, boxShadow = null,
 
     shared Color|Inherit? color;
 
-    doc ""
+    shared Display? display;
+
+    ""
     shared FontStyle|Inherit? fontStyle;
 
-    doc ""
+    ""
     shared FontWeight|Inherit? fontWeight;
 
     shared Box? margin;
 
     shared Float|Integer? opacity;
+
+    shared Outline|Integer? outline;
 
     shared Box? padding;
 
