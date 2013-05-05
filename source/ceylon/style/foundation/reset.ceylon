@@ -6,10 +6,10 @@ shared Stylesheet reset = Stylesheet {
     html -> Style {
     },
 
-    a.focus -> Style {
+    a.when(focus) -> Style {
     },
 
-    [a.hover, a.active] -> Style {
+    [a.when(hover), a.when(active)] -> Style {
         outline = 0;
     },
 

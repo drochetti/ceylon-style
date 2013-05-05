@@ -3,9 +3,9 @@ import ceylon.style.selector { ClassNameSelector, IdSelector }
 
 // common elements
 
-shared object header extends IdSelector("header") {}
+shared object pageHeader extends IdSelector("header") {}
 
-shared object footer extends IdSelector("footer") {}
+shared object pageFooter extends IdSelector("footer") {}
 
 shared object thumb extends ClassNameSelector("thumb") {}
 
@@ -50,3 +50,5 @@ shared object primary extends ClassNameSelector("primary") {}
 shared object secondary extends ClassNameSelector("secondary") {}
 
 shared object alternative extends ClassNameSelector("alternative") {}
+
+shared object inverse extends ClassNameSelector("inverse") {}
