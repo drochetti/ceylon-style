@@ -2,21 +2,29 @@
 
 shared interface SelectorBuilder satisfies Selector {
 
-    shared default CompositeSelector id(String id) =>
-            CompositeSelector(this, IdSelector(id));
+    shared default CompositeSelector id(String|IdSelector id) {
+        switch (id)
+        case (is String) {
+            return CompositeSelector(this, IdSelector(id));
+        }
+        case (is IdSelector) {
+            return CompositeSelector(this, id);
+        }
+    }
 
-    shared CompositeSelector cn(String cls) => classname(cls);
+    shared default CompositeSelector name(String|ClassNameSelector cls) {
+        switch (cls)
+        case (is String) {
+            return CompositeSelector(this, ClassNameSelector(cls));
+        }
+        case (is ClassNameSelector) {
+            return CompositeSelector(this, cls);
+        }
+    }
 
-    shared default CompositeSelector classname(String cls) =>
-            CompositeSelector(this, ClassNameSelector(cls));
+    shared CompositeSelector n(String cls) => name(cls);
 
-    shared default CompositeSelector hover =>
-            CompositeSelector(this, PseudoSelector("hover"));
-
-    shared default CompositeSelector active =>
-            CompositeSelector(this, PseudoSelector("active"));
-
-    shared default CompositeSelector focus =>
-            CompositeSelector(this, PseudoSelector("focus"));
+    shared default CompositeSelector when(PseudoSelector sel) =>
+            CompositeSelector(this, sel);
 
 }

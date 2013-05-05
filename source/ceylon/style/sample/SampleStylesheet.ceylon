@@ -28,7 +28,7 @@ shared Stylesheet sampleStyles = Stylesheet {
             return [ defaultMargin, margin.integer, defaultMargin, margin.integer ];
         }
 
-        [el.cn("header"), el.cn("header-alternative")] -> Style { // ".header, .header-alternative"
+        [el.name("header"), el.name("header-alternative")] -> Style { // ".header, .header-alternative"
             Background {
                 color = transparent;
                 url = "/img/header.png";
@@ -37,7 +37,7 @@ shared Stylesheet sampleStyles = Stylesheet {
             };
             fontStyle = italic;
 
-            [and.cn("selected"), and.hover] -> Style { // "&.selected, &:hover" 
+            [and.name("selected"), and.when(hover)] -> Style { // "&.selected, &:hover" 
                 fontWeight = bolder;
                 fontStyle = inherit;
             }
