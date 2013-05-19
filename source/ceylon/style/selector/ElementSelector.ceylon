@@ -1,3 +1,7 @@
+import ceylon.style.selector {
+    unvisitedSelector = unvisited,
+    activeSelector = active
+}
 
 shared abstract class ElementSelector()
         of  el | a | abbr | address | area | article | aside | audio |
@@ -38,7 +42,13 @@ shared object el extends ElementSelector() {
 //noscript | 
 //object |
 
-shared object a extends ElementSelector() {}
+shared object a extends ElementSelector() {
+
+    shared CompositeSelector active => CompositeSelector(this, activeSelector);
+
+    shared CompositeSelector unvisited => CompositeSelector(this, unvisitedSelector);
+
+}
 
 shared object abbr extends ElementSelector() {}
 

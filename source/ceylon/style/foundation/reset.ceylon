@@ -9,7 +9,7 @@ shared Stylesheet reset = Stylesheet {
     a.when(focus) -> Style {
     },
 
-    [a.when(hover), a.when(active)] -> Style {
+    [a.when(hover), a.active] -> Style {
         outline = 0;
     },
 

@@ -1,7 +1,7 @@
 
 shared abstract class PseudoSelector(name)
         of  active | after | before | firstChild |
-            focus | hover | islink | lastChild 
+            focus | hover | lastChild | unvisited 
         satisfies Selector {
 
     shared String name;
@@ -22,6 +22,6 @@ shared object focus extends PseudoSelector("focus") {}
 
 shared object hover extends PseudoSelector("hover") {}
 
-shared object islink extends PseudoSelector("link") {}
-
 shared object lastChild extends PseudoSelector("last-child") {}
+
+shared object unvisited extends PseudoSelector("link") {}
